@@ -37,9 +37,10 @@ public class ParkingLotTest {
     void should_return_a_car_when_fetch_given_a_parking_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
-
+        Car actualCar = new Car();
+        Ticket ticket = parkingLot.park(actualCar);
         //when
-        Car car = parkingLot.fetch(new Ticket());
+        Car car = parkingLot.fetch(ticket);
 
         //then
         assertNotNull(car);
