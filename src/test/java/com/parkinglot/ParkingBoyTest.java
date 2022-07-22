@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ParkingBobTest {
+public class ParkingBoyTest {
     //Story 3
     @Test
     void should_return_a_ticket_when_park_given_a_parking_boy_with_a_parking_lot_and_a_car() {
