@@ -91,4 +91,19 @@ public class ParkingLotTest {
         assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
 
+    @Test
+    void should_throw_no_available_position_when_park_given_a_car() {
+        //given
+        ParkingLot parkingLot = new ParkingLot(1);
+        parkingLot.park(new Car());
+
+        //when
+        NoAvailablePositionException exception = assertThrows(
+                NoAvailablePositionException.class,
+                () -> parkingLot.park(new Car()));
+
+        //then
+        assertEquals("No available position", exception.getMessage());
+    }
+
 }
