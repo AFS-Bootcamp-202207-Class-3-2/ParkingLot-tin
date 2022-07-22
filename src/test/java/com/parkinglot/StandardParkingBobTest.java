@@ -42,26 +42,26 @@ public class StandardParkingBobTest {
     }
 
 
-//    @Test
-//    void should_return_the_right_car_when_fetch_given_a_parking_boy_with_two_parking_ticket() {
-//        //given
-//        List<ParkingLot> parkingLotList = new ArrayList<>();
-//        parkingLotList.add(new ParkingLot(1));
-//        parkingLotList.add(new ParkingLot(1));
-//        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
-//        Car actualCarA = new Car();
-//        Car actualCarB = new Car();
-//        Ticket ticketA = standardParkingBoy.park(actualCarA);
-//        Ticket ticketB = standardParkingBoy.park(actualCarB);
-//
-//        //when
-//        Car carA = standardParkingBoy.fetch(ticketA);
-//        Car carB = standardParkingBoy.fetch(ticketB);
-//
-//        //then
-//        assertEquals(actualCarA,carA);
-//        assertEquals(actualCarB,carB);
-//    }
+    @Test
+    void should_return_the_right_car_when_fetch_given_a_parking_boy_with_two_parking_ticket_and_two_lot() {
+        //given
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(1));
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
+        Car actualCarA = new Car();
+        Car actualCarB = new Car();
+        Ticket ticketA = standardParkingBoy.park(actualCarA);
+        Ticket ticketB = standardParkingBoy.park(actualCarB);
+
+        //when
+        Car carA = standardParkingBoy.fetch(ticketA);
+        Car carB = standardParkingBoy.fetch(ticketB);
+
+        //then
+        assertEquals(actualCarA,carA);
+        assertEquals(actualCarB,carB);
+    }
 //
 //    @Test
 //    void should_throw_Unrecognized_parking_ticket_when_fetch_given_a_parking_boy_with_an_unrecognized_ticket() {
