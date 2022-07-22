@@ -78,22 +78,22 @@ public class StandardParkingBobTest {
         assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
 //
-//    @Test
-//    void should_throw_Unrecognized_parking_ticket_when_fetch_given_a_parking_boy_with_a_used_ticket() {
-//        //given
-//        List<ParkingLot> parkingLotList = new ArrayList<>();
-//        parkingLotList.add(new ParkingLot(1));
-//        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
-//        Car car = new Car();
-//        Ticket ticket = standardParkingBoy.park(car);
-//        standardParkingBoy.fetch(ticket);
-//        //when
-//        UnrecognizedParingTicketException exception = assertThrows(
-//                UnrecognizedParingTicketException.class,
-//                () -> standardParkingBoy.fetch(new Ticket()));
-//        //then
-//        assertEquals("Unrecognized paring ticket", exception.getMessage());
-//    }
+    @Test
+    void should_throw_Unrecognized_parking_ticket_when_fetch_given_a_parking_boy_with_a_used_ticket_and_two_lots() {
+        //given
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(1));
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
+        Ticket ticket = standardParkingBoy.park(new Car());
+        standardParkingBoy.fetch(ticket);
+        //when
+        UnrecognizedParingTicketException exception = assertThrows(
+                UnrecognizedParingTicketException.class,
+                () -> standardParkingBoy.fetch(ticket));
+        //then
+        assertEquals("Unrecognized paring ticket", exception.getMessage());
+    }
 //
 //    @Test
 //    void should_throw_no_available_position_when_park_given_a_parking_boy_with_a_car() {

@@ -34,7 +34,9 @@ public class ParkingLot {
             throw new UnrecognizedParingTicketException();
         }
         capacity ++;
-        return association.get(ticket);
+        Car car = association.get(ticket);
+        association.remove(ticket);
+        return car;
     }
 
     public int getCapacity() {
@@ -42,9 +44,9 @@ public class ParkingLot {
     }
 
     public boolean hasContainsKey(Ticket ticket) {
-        if(!association.containsKey(ticket)){
-            return false;
+        if(association.containsKey(ticket)){
+            return true;
         }
-        return true;
+        return false;
     }
 }

@@ -86,7 +86,7 @@ public class ParkingBobTest {
         //when
         UnrecognizedParingTicketException exception = assertThrows(
                 UnrecognizedParingTicketException.class,
-                () -> standardParkingBoy.fetch(new Ticket()));
+                () -> standardParkingBoy.fetch(ticket));
         //then
         assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
