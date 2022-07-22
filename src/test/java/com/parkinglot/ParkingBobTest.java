@@ -9,15 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParkingBobTest {
+    //Story 3
     @Test
     void should_return_a_ticket_when_park_given_a_parking_boy_with_a_parking_lot_and_a_car() {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
 
         //when
-        Ticket ticket = parkingBoy.park(new Car());
+        Ticket ticket = standardParkingBoy.park(new Car());
 
         //then
         assertNotNull(ticket);
@@ -28,11 +29,11 @@ public class ParkingBobTest {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
         Car actualCar = new Car();
-        Ticket ticket = parkingBoy.park(actualCar);
+        Ticket ticket = standardParkingBoy.park(actualCar);
         //when
-        Car car = parkingBoy.fetch(ticket);
+        Car car = standardParkingBoy.fetch(ticket);
 
         //then
         assertNotNull(car);
@@ -43,15 +44,15 @@ public class ParkingBobTest {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(2));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
         Car actualCarA = new Car();
         Car actualCarB = new Car();
-        Ticket ticketA = parkingBoy.park(actualCarA);
-        Ticket ticketB = parkingBoy.park(actualCarB);
+        Ticket ticketA = standardParkingBoy.park(actualCarA);
+        Ticket ticketB = standardParkingBoy.park(actualCarB);
 
         //when
-        Car carA = parkingBoy.fetch(ticketA);
-        Car carB = parkingBoy.fetch(ticketB);
+        Car carA = standardParkingBoy.fetch(ticketA);
+        Car carB = standardParkingBoy.fetch(ticketB);
 
         //then
         assertEquals(actualCarA,carA);
@@ -63,12 +64,12 @@ public class ParkingBobTest {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
 
         //when
         UnrecognizedParingTicketException exception = assertThrows(
                 UnrecognizedParingTicketException.class,
-                () -> parkingBoy.fetch(new Ticket()));
+                () -> standardParkingBoy.fetch(new Ticket()));
         //then
         assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
@@ -78,14 +79,14 @@ public class ParkingBobTest {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
         Car car = new Car();
-        Ticket ticket = parkingBoy.park(car);
-        parkingBoy.fetch(ticket);
+        Ticket ticket = standardParkingBoy.park(car);
+        standardParkingBoy.fetch(ticket);
         //when
         UnrecognizedParingTicketException exception = assertThrows(
                 UnrecognizedParingTicketException.class,
-                () -> parkingBoy.fetch(new Ticket()));
+                () -> standardParkingBoy.fetch(new Ticket()));
         //then
         assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
@@ -95,13 +96,13 @@ public class ParkingBobTest {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
-        parkingBoy.park(new Car());
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
+        standardParkingBoy.park(new Car());
 
         //when
         NoAvailablePositionException exception = assertThrows(
                 NoAvailablePositionException.class,
-                () -> parkingBoy.park(new Car()));
+                () -> standardParkingBoy.park(new Car()));
 
         //then
         assertEquals("No available position", exception.getMessage());

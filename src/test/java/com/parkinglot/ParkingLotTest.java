@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
 
-
+    //Story 1
     @Test
     void should_return_a_ticket_when_park_given_a_parking_lot_and_a_car() {
         //given
@@ -63,7 +63,7 @@ public class ParkingLotTest {
         assertEquals(actualCarA,carA);
         assertEquals(actualCarB,carB);
     }
-
+    //Story 2
     @Test
     void should_throw_Unrecognized_parking_ticket_when_fetch_given_an_unrecognized_ticket() {
         //given
