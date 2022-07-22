@@ -64,10 +64,25 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_throw_Unrecognized_paring_ticket_when_fetch_given_an_unrecognized_ticket() {
+    void should_throw_Unrecognized_parking_ticket_when_fetch_given_an_unrecognized_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot();
 
+        //when
+        UnrecognizedParingTicketException exception = assertThrows(
+                UnrecognizedParingTicketException.class,
+                () -> parkingLot.fetch(new Ticket()));
+        //then
+        assertEquals("Unrecognized paring ticket", exception.getMessage());
+    }
+
+    @Test
+    void should_throw_Unrecognized_parking_ticket_when_fetch_given_a_used_ticket() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        Ticket ticket = parkingLot.park(car);
+        parkingLot.fetch(ticket);
         //when
         UnrecognizedParingTicketException exception = assertThrows(
                 UnrecognizedParingTicketException.class,
