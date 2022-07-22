@@ -19,4 +19,8 @@ public class ParkingLot {
         capacity --;
         return new Ticket();
     }
+
+    public Car fetch(Ticket ticket) {
+        return new Car();
+    }
 }
