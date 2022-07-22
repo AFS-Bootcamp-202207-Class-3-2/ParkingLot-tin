@@ -58,10 +58,22 @@ public class ParkingLotTest {
         Car carA = parkingLot.fetch(ticketA);
         Car carB = parkingLot.fetch(ticketB);
 
-
         //then
         assertEquals(actualCarA,carA);
         assertEquals(actualCarB,carB);
-
     }
+
+    @Test
+    void should_throw_Unrecognized_paring_ticket_when_fetch_given_an_unrecognized_ticket() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+
+        //when
+        UnrecognizedParingTicketException exception = assertThrows(
+                UnrecognizedParingTicketException.class,
+                () -> parkingLot.fetch(new Ticket()));
+        //then
+        assertEquals("Unrecognized paring ticket", exception.getMessage());
+    }
+
 }

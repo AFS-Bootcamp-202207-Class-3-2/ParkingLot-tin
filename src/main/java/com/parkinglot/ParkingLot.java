@@ -30,6 +30,9 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) {
+        if(!association.containsKey(ticket)){
+            throw new UnrecognizedParingTicketException();
+        }
         return association.get(ticket);
     }
 }
