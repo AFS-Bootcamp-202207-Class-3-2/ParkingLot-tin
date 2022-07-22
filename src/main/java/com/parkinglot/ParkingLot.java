@@ -1,8 +1,15 @@
 package com.parkinglot;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class ParkingLot {
 
+
     private int capacity;
+    private Map<Ticket, Car> association = new HashMap<>();
 
     public ParkingLot() {
         capacity = 10;
@@ -17,10 +24,12 @@ public class ParkingLot {
             return null;
         }
         capacity --;
-        return new Ticket();
+        Ticket ticket = new Ticket();
+        association.put(ticket, car);
+        return ticket;
     }
 
     public Car fetch(Ticket ticket) {
-        return new Car();
+        return association.get(ticket);
     }
 }
