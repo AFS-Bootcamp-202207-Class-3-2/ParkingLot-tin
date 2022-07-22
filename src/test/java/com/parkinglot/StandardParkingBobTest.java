@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StandardParkingBobTest {
     //Story 4
     @Test
-    void should_return_a_ticket_when_park_given_a_parking_boy_with_two_parking_lot_and_a_car() {
+    void should_return_a_ticket_when_park_given_with_two_parking_lot_and_a_car() {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
@@ -24,20 +24,22 @@ public class StandardParkingBobTest {
         assertNotNull(ticket);
     }
 
-//    @Test
-//    void should_return_a_ticket_when_park_given_a_parking_boy_with_a_parking_ticket() {
-//        //given
-//        List<ParkingLot> parkingLotList = new ArrayList<>();
-//        parkingLotList.add(new ParkingLot(1));
-//        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
-//        Car actualCar = new Car();
-//        Ticket ticket = standardParkingBoy.park(actualCar);
-//        //when
-//        Car car = standardParkingBoy.fetch(ticket);
-//
-//        //then
-//        assertNotNull(car);
-//    }
+    @Test
+    void should_return_a_ticket_when_park_given_with_one_full_lot_and_a_lot_and_a_car() {
+        //given
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(1));
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
+        standardParkingBoy.park(new Car());
+        Car actualCar = new Car();
+
+        //when
+        Ticket ticket = standardParkingBoy.park(actualCar);
+
+        //then
+        assertNotNull(ticket);
+    }
 
 
 //    @Test
