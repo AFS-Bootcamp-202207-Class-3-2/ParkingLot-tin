@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StandardParkingBobTest {
     //Story 4
     @Test
-    void should_return_a_ticket_when_park_given_with_two_parking_lot_and_a_car() {
+    void should_return_a_ticket_when_park_given_with_two_parking_lots_and_a_car() {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
@@ -43,7 +43,7 @@ public class StandardParkingBobTest {
 
 
     @Test
-    void should_return_the_right_car_when_fetch_given_a_parking_boy_with_two_parking_ticket_and_two_lot() {
+    void should_return_the_right_car_when_fetch_given_a_parking_boy_with_two_parking_tickets_and_two_lots() {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
@@ -62,21 +62,21 @@ public class StandardParkingBobTest {
         assertEquals(actualCarA,carA);
         assertEquals(actualCarB,carB);
     }
-//
-//    @Test
-//    void should_throw_Unrecognized_parking_ticket_when_fetch_given_a_parking_boy_with_an_unrecognized_ticket() {
-//        //given
-//        List<ParkingLot> parkingLotList = new ArrayList<>();
-//        parkingLotList.add(new ParkingLot(1));
-//        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
-//
-//        //when
-//        UnrecognizedParingTicketException exception = assertThrows(
-//                UnrecognizedParingTicketException.class,
-//                () -> standardParkingBoy.fetch(new Ticket()));
-//        //then
-//        assertEquals("Unrecognized paring ticket", exception.getMessage());
-//    }
+
+    @Test
+    void should_throw_Unrecognized_parking_ticket_when_fetch_given_a_parking_boy_with_an_unrecognized_ticket_and_two_lots() {
+        //given
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1));
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
+
+        //when
+        UnrecognizedParingTicketException exception = assertThrows(
+                UnrecognizedParingTicketException.class,
+                () -> standardParkingBoy.fetch(new Ticket()));
+        //then
+        assertEquals("Unrecognized paring ticket", exception.getMessage());
+    }
 //
 //    @Test
 //    void should_throw_Unrecognized_parking_ticket_when_fetch_given_a_parking_boy_with_a_used_ticket() {
