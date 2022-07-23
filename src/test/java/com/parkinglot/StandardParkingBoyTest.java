@@ -68,6 +68,7 @@ public class StandardParkingBoyTest {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(1));
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
 
         //when

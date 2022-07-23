@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author 陈祁天
@@ -49,5 +48,21 @@ public class SmartParkingBoyTest {
         //then
         assertEquals(actualCarA,carA);
         assertEquals(actualCarB,carB);
+    }
+
+    @Test
+    void should_throw_Unrecognized_parking_ticket_when_fetch_given_with_an_unrecognized_ticket_and_two_lots() {
+        //given
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(1));
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
+
+        //when
+        UnrecognizedParingTicketException exception = assertThrows(
+                UnrecognizedParingTicketException.class,
+                () -> standardParkingBoy.fetch(new Ticket()));
+        //then
+        assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
 }
