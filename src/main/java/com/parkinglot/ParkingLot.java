@@ -32,7 +32,7 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) {
-        if(!association.containsKey(ticket)){
+        if(!hasCar(ticket)){
             throw new UnrecognizedParingTicketException();
         }
         capacity ++;
@@ -45,11 +45,8 @@ public class ParkingLot {
         return capacity;
     }
 
-    public boolean hasContainsKey(Ticket ticket) {
-        if(association.containsKey(ticket)){
-            return true;
-        }
-        return false;
+    public boolean hasCar(Ticket ticket) {
+        return association.containsKey(ticket);
     }
 
     public double calculateVacancyRate() {

@@ -22,7 +22,7 @@ public class SmartParkingBoyTest {
         Ticket ticket = smartParkingBoy.park(new Car());
 
         //then
-        assertTrue(parkingLotList.get(0).hasContainsKey(ticket));
+        assertTrue(parkingLotList.get(0).hasCar(ticket));
     }
 
     @Test

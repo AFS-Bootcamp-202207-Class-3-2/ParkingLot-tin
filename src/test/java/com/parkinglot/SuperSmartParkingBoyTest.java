@@ -3,7 +3,6 @@ package com.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class SuperSmartParkingBoyTest {
         //when
         Ticket ticket = superSmartParkingBoy.park(new Car());
         //then
-        assertTrue(parkingLotList.get(0).hasContainsKey(ticket));
+        assertTrue(parkingLotList.get(0).hasCar(ticket));
     }
 
     @Test
@@ -42,7 +41,7 @@ public class SuperSmartParkingBoyTest {
                 .get());
         Ticket ticket = superSmartParkingBoy.park(new Car());
         //then
-        assertTrue(parkingLotList.get(1).hasContainsKey(ticket));
+        assertTrue(parkingLotList.get(1).hasCar(ticket));
     }
 
     @Test

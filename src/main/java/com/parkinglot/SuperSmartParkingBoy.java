@@ -24,7 +24,7 @@ public class SuperSmartParkingBoy {
 
     public Car fetch(Ticket ticket) {
         ParkingLot currentParkingLot = parkingLots.stream()
-                .filter(parkingLot -> parkingLot.hasContainsKey(ticket))
+                .filter(parkingLot -> parkingLot.hasCar(ticket))
                 .findFirst()
                 .orElseThrow(UnrecognizedParingTicketException::new);
         return currentParkingLot.fetch(ticket);
