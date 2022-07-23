@@ -7,8 +7,7 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SuperSmartParkingBoyTest {
     //Story 6
@@ -18,11 +17,11 @@ public class SuperSmartParkingBoyTest {
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(3));
         parkingLotList.add(new ParkingLot(3));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
-        smartParkingBoy.park(new Car());
-        smartParkingBoy.park(new Car());
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        superSmartParkingBoy.park(new Car());
+        superSmartParkingBoy.park(new Car());
         //when
-        Ticket ticket = smartParkingBoy.park(new Car());
+        Ticket ticket = superSmartParkingBoy.park(new Car());
         //then
         assertTrue(parkingLotList.get(0).hasContainsKey(ticket));
     }
@@ -33,16 +32,37 @@ public class SuperSmartParkingBoyTest {
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(new ParkingLot(3));
         parkingLotList.add(new ParkingLot(3));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
-        smartParkingBoy.park(new Car());
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        superSmartParkingBoy.park(new Car());
 
         //when
         assertEquals(parkingLotList.get(1).calculateVacancyRate(),parkingLotList.stream()
                 .map(ParkingLot::calculateVacancyRate)
                 .max(Double::compareTo)
                 .get());
-        Ticket ticket = smartParkingBoy.park(new Car());
+        Ticket ticket = superSmartParkingBoy.park(new Car());
         //then
         assertTrue(parkingLotList.get(1).hasContainsKey(ticket));
+    }
+
+    @Test
+    void should_return_the_right_car_when_fetch_given_with_two_parking_tickets_and_two_lots() {
+        //given
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(new ParkingLot(2));
+        parkingLotList.add(new ParkingLot(2));
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        Car actualCarA = new Car();
+        Car actualCarB = new Car();
+        Ticket ticketA = superSmartParkingBoy.park(actualCarA);
+        Ticket ticketB = superSmartParkingBoy.park(actualCarB);
+
+        //when
+        Car carA = superSmartParkingBoy.fetch(ticketA);
+        Car carB = superSmartParkingBoy.fetch(ticketB);
+
+        //then
+        assertEquals(actualCarA,carA);
+        assertEquals(actualCarB,carB);
     }
 }
