@@ -7,11 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * @author 陈祁天
- * @date 2022/7/23
- * @description
- */
+
 public class SmartParkingBoyTest {
     //Story 5
     @Test

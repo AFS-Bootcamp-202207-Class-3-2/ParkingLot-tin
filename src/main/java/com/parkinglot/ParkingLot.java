@@ -1,21 +1,23 @@
 package com.parkinglot;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ParkingLot {
 
+    private final int fullCapacity;
 
     private int capacity;
+
     private Map<Ticket, Car> association = new HashMap<>();
 
     public ParkingLot() {
-        capacity = 10;
+        fullCapacity = 10;
+        capacity = fullCapacity;
     }
 
     public ParkingLot(int capacity) {
+        fullCapacity = capacity;
         this.capacity = capacity;
     }
 
@@ -48,5 +50,9 @@ public class ParkingLot {
             return true;
         }
         return false;
+    }
+
+    public double calculateVacancyRate() {
+        return 1.0 * getCapacity() / fullCapacity;
     }
 }
