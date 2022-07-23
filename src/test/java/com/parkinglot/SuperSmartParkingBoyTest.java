@@ -81,4 +81,21 @@ public class SuperSmartParkingBoyTest {
         //then
         assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
+
+    @Test
+    void should_throw_Unrecognized_parking_ticket_when_fetch_given_with_a_used_ticket_and_two_lots() {
+        //given
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(1));
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        Ticket ticket = superSmartParkingBoy.park(new Car());
+        superSmartParkingBoy.fetch(ticket);
+        //when
+        UnrecognizedParingTicketException exception = assertThrows(
+                UnrecognizedParingTicketException.class,
+                () -> superSmartParkingBoy.fetch(ticket));
+        //then
+        assertEquals("Unrecognized paring ticket", exception.getMessage());
+    }
 }
