@@ -22,12 +22,27 @@ public class SmartParkingBoyTest {
         parkingLotList.add(new ParkingLot(2));
         parkingLotList.add(new ParkingLot(2));
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
-        Car car = new Car();
 
         //when
-        Ticket ticket = smartParkingBoy.park(car);
+        Ticket ticket = smartParkingBoy.park(new Car());
 
         //then
         assertTrue(parkingLotList.get(0).hasContainsKey(ticket));
+    }
+
+    @Test
+    void should_park_first_lot_when_park_given_with_second_lot_with_more_empty_parking_spaces_and_a_car() {
+        //given
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(new ParkingLot(2));
+        parkingLotList.add(new ParkingLot(2));
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
+        smartParkingBoy.park(new Car());
+
+        //when
+        Ticket ticket = smartParkingBoy.park(new Car());
+
+        //then
+        assertTrue(parkingLotList.get(1).hasContainsKey(ticket));
     }
 }
