@@ -31,18 +31,23 @@ public class SmartParkingBoyTest {
     }
 
     @Test
-    void should_park_first_lot_when_park_given_with_second_lot_with_more_empty_parking_spaces_and_a_car() {
+    void should_return_the_right_car_when_fetch_given_with_two_parking_tickets_and_two_lots() {
         //given
         List<ParkingLot> parkingLotList = new ArrayList<>();
-        parkingLotList.add(new ParkingLot(2));
-        parkingLotList.add(new ParkingLot(2));
+        parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(1));
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
-        smartParkingBoy.park(new Car());
+        Car actualCarA = new Car();
+        Car actualCarB = new Car();
+        Ticket ticketA = smartParkingBoy.park(actualCarA);
+        Ticket ticketB = smartParkingBoy.park(actualCarB);
 
         //when
-        Ticket ticket = smartParkingBoy.park(new Car());
+        Car carA = smartParkingBoy.fetch(ticketA);
+        Car carB = smartParkingBoy.fetch(ticketB);
 
         //then
-        assertTrue(parkingLotList.get(1).hasContainsKey(ticket));
+        assertEquals(actualCarA,carA);
+        assertEquals(actualCarB,carB);
     }
 }
