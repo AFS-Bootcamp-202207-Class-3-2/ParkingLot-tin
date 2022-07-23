@@ -52,4 +52,5 @@ public class ParkingLot {
     public double calculateVacancyRate() {
         return 1.0 * getCapacity() / fullCapacity;
     }
+
 }

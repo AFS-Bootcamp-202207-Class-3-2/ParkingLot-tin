@@ -4,29 +4,15 @@ package com.parkinglot;
 import java.util.Comparator;
 import java.util.List;
 
-public class SuperSmartParkingBoy {
+public class SuperSmartParkingBoy implements ParkingBoy {
 
-    private List<ParkingLot> parkingLots;
-
-    public SuperSmartParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
-    }
-
-    public Ticket park(Car car) {
+    @Override
+    public Ticket park(Car car, List<ParkingLot> parkingLots) {
         ParkingLot currentParkingLot = parkingLots.stream()
                 .filter(parkingLot -> parkingLot.getCapacity() != 0)
-                .sorted(Comparator.comparingDouble(ParkingLot::calculateVacancyRate).reversed())
-                .findFirst()
+                .max(Comparator.comparingDouble(ParkingLot::calculateVacancyRate))
                 .orElseThrow(NoAvailablePositionException::new);
         return currentParkingLot.park(car);
-
     }
 
-    public Car fetch(Ticket ticket) {
-        ParkingLot currentParkingLot = parkingLots.stream()
-                .filter(parkingLot -> parkingLot.hasCar(ticket))
-                .findFirst()
-                .orElseThrow(UnrecognizedParingTicketException::new);
-        return currentParkingLot.fetch(ticket);
-    }
 }

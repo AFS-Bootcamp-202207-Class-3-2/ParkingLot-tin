@@ -2,15 +2,10 @@ package com.parkinglot;
 
 import java.util.List;
 
-public class StandardParkingBoy {
+public class StandardParkingBoy implements ParkingBoy {
 
-    private List<ParkingLot> parkingLots;
-
-    public StandardParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
-    }
-
-    public Ticket park(Car car) {
+    @Override
+    public Ticket park(Car car, List<ParkingLot> parkingLots) {
         ParkingLot currentParkingLot = parkingLots.stream()
                 .filter(parkingLot -> parkingLot.getCapacity() != 0)
                 .findFirst()
@@ -19,11 +14,4 @@ public class StandardParkingBoy {
 
     }
 
-    public Car fetch(Ticket ticket) {
-        ParkingLot currentParkingLot = parkingLots.stream()
-                .filter(parkingLot -> parkingLot.hasCar(ticket))
-                .findFirst()
-                .orElseThrow(UnrecognizedParingTicketException::new);
-        return currentParkingLot.fetch(ticket);
-    }
 }

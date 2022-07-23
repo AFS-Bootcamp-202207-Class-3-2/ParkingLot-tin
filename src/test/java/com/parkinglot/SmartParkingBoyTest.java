@@ -9,17 +9,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SmartParkingBoyTest {
+
+    SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+
     //Story 5
     @Test
     void should_park_first_lot_when_park_given_with_two_empty_parking_lots_of_the_same_number_and_a_car() {
         //given
-        List<ParkingLot> parkingLotList = new ArrayList<>();
-        parkingLotList.add(new ParkingLot(2));
-        parkingLotList.add(new ParkingLot(2));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
+        List<ParkingLot> parkingLotList = new ArrayList<ParkingLot>(){{
+            add(new ParkingLot(1));
+            add(new ParkingLot(1));
+        }};
+
+        ManageParkingLot manageParkingLot = new ManageParkingLot(smartParkingBoy, parkingLotList);
 
         //when
-        Ticket ticket = smartParkingBoy.park(new Car());
+        Ticket ticket = manageParkingLot.park(new Car());
 
         //then
         assertTrue(parkingLotList.get(0).hasCar(ticket));
@@ -28,18 +33,20 @@ public class SmartParkingBoyTest {
     @Test
     void should_return_the_right_car_when_fetch_given_with_two_parking_tickets_and_two_lots() {
         //given
-        List<ParkingLot> parkingLotList = new ArrayList<>();
-        parkingLotList.add(new ParkingLot(1));
-        parkingLotList.add(new ParkingLot(1));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
+        List<ParkingLot> parkingLotList = new ArrayList<ParkingLot>(){{
+            add(new ParkingLot(1));
+            add(new ParkingLot(1));
+        }};
+
+        ManageParkingLot manageParkingLot = new ManageParkingLot(smartParkingBoy, parkingLotList);
         Car actualCarA = new Car();
         Car actualCarB = new Car();
-        Ticket ticketA = smartParkingBoy.park(actualCarA);
-        Ticket ticketB = smartParkingBoy.park(actualCarB);
+        Ticket ticketA = manageParkingLot.park(actualCarA);
+        Ticket ticketB = manageParkingLot.park(actualCarB);
 
         //when
-        Car carA = smartParkingBoy.fetch(ticketA);
-        Car carB = smartParkingBoy.fetch(ticketB);
+        Car carA = manageParkingLot.fetch(ticketA);
+        Car carB = manageParkingLot.fetch(ticketB);
 
         //then
         assertEquals(actualCarA,carA);
@@ -49,15 +56,17 @@ public class SmartParkingBoyTest {
     @Test
     void should_throw_Unrecognized_parking_ticket_when_fetch_given_with_an_unrecognized_ticket_and_two_lots() {
         //given
-        List<ParkingLot> parkingLotList = new ArrayList<>();
-        parkingLotList.add(new ParkingLot(1));
-        parkingLotList.add(new ParkingLot(1));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
+        List<ParkingLot> parkingLotList = new ArrayList<ParkingLot>(){{
+            add(new ParkingLot(1));
+            add(new ParkingLot(1));
+        }};
+
+        ManageParkingLot manageParkingLot = new ManageParkingLot(smartParkingBoy, parkingLotList);
 
         //when
         UnrecognizedParingTicketException exception = assertThrows(
                 UnrecognizedParingTicketException.class,
-                () -> smartParkingBoy.fetch(new Ticket()));
+                () -> manageParkingLot.fetch(new Ticket()));
         //then
         assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
@@ -65,16 +74,18 @@ public class SmartParkingBoyTest {
     @Test
     void should_throw_Unrecognized_parking_ticket_when_fetch_given_with_a_used_ticket_and_two_lots() {
         //given
-        List<ParkingLot> parkingLotList = new ArrayList<>();
-        parkingLotList.add(new ParkingLot(1));
-        parkingLotList.add(new ParkingLot(1));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
-        Ticket ticket = smartParkingBoy.park(new Car());
-        smartParkingBoy.fetch(ticket);
+        List<ParkingLot> parkingLotList = new ArrayList<ParkingLot>(){{
+            add(new ParkingLot(1));
+            add(new ParkingLot(1));
+        }};
+
+        ManageParkingLot manageParkingLot = new ManageParkingLot(smartParkingBoy, parkingLotList);
+        Ticket ticket = manageParkingLot.park(new Car());
+        manageParkingLot.fetch(ticket);
         //when
         UnrecognizedParingTicketException exception = assertThrows(
                 UnrecognizedParingTicketException.class,
-                () -> smartParkingBoy.fetch(ticket));
+                () -> manageParkingLot.fetch(ticket));
         //then
         assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
@@ -82,17 +93,19 @@ public class SmartParkingBoyTest {
     @Test
     void should_throw_no_available_position_when_park_given_with_a_car_and_two_full_lots() {
         //given
-        List<ParkingLot> fullParkingLotList = new ArrayList<>();
-        fullParkingLotList.add(new ParkingLot(1));
-        fullParkingLotList.add(new ParkingLot(1));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(fullParkingLotList);
-        smartParkingBoy.park(new Car());
-        smartParkingBoy.park(new Car());
+        List<ParkingLot> parkingLotList = new ArrayList<ParkingLot>(){{
+            add(new ParkingLot(1));
+            add(new ParkingLot(1));
+        }};
+
+        ManageParkingLot manageParkingLot = new ManageParkingLot(smartParkingBoy, parkingLotList);
+        manageParkingLot.park(new Car());
+        manageParkingLot.park(new Car());
 
         //when
         NoAvailablePositionException exception = assertThrows(
                 NoAvailablePositionException.class,
-                () -> smartParkingBoy.park(new Car()));
+                () -> manageParkingLot.park(new Car()));
 
         //then
         assertEquals("No available position", exception.getMessage());
