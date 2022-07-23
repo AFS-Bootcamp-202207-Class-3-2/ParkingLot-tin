@@ -82,4 +82,23 @@ public class SmartParkingBoyTest {
         //then
         assertEquals("Unrecognized paring ticket", exception.getMessage());
     }
+
+    @Test
+    void should_throw_no_available_position_when_park_given_with_a_car_and_two_full_lots() {
+        //given
+        List<ParkingLot> fullParkingLotList = new ArrayList<>();
+        fullParkingLotList.add(new ParkingLot(1));
+        fullParkingLotList.add(new ParkingLot(1));
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(fullParkingLotList);
+        smartParkingBoy.park(new Car());
+        smartParkingBoy.park(new Car());
+
+        //when
+        NoAvailablePositionException exception = assertThrows(
+                NoAvailablePositionException.class,
+                () -> smartParkingBoy.park(new Car()));
+
+        //then
+        assertEquals("No available position", exception.getMessage());
+    }
 }
